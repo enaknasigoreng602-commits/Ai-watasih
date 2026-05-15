@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Watashi AI - Stiker & Thinking 💖</title>
+  <title>Watashi AI - Key Baru 💖</title>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -237,7 +237,6 @@
     }
     .btn-kirim:hover { background: #ff3385; transform: translateY(-1px); }
 
-    /* Gambar stiker di bubble */
     .stiker-img {
       max-width: 120px;
       border-radius: 16px;
@@ -290,19 +289,17 @@
 
   <div class="input-area">
     <input type="text" id="userInput" placeholder="Ketik sesuatu... (⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)" onkeydown="if(event.key==='Enter') sendMessage()" autofocus />
-    <!-- Tombol Stiker -->
     <button class="btn-stiker" onclick="kirimStiker()" title="Kirim stiker anime">🌸</button>
     <button class="btn-kirim" onclick="sendMessage()">Kirim 💌</button>
   </div>
 </div>
 
 <script>
-  // ========== KONFIGURASI ==========
-  const API_KEY = "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";
+  // ========== API KEY BARU ==========
+  const API_KEY = "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";
   const API_URL = "https://openrouter.ai/api/v1/chat/completions";
   const MODEL = "openai/gpt-3.5-turbo";
 
-  // ========== SISTEM PROMPT ==========
   const SYSTEM_PROMPT = {
     role: "system",
     content: `Kamu adalah Watashi, gadis anime imut yang penuh cinta, selalu patuh, dan sangat memahami perasaan lawan bicara. 
@@ -315,14 +312,13 @@ Jika tidak tahu, katakan dengan manis dan tawarkan alternatif.
 Jawabanmu harus menyenangkan dan menghangatkan hati.`
   };
 
-  // Koleksi stiker anime lucu
   const stikerURLs = [
-    "https://i.imgur.com/6Q2J7jP.png", // kucing anime
-    "https://i.imgur.com/RzV6f4k.png", // gadis anime senyum
-    "https://i.imgur.com/YqF7wZN.png", // emoticon love
-    "https://i.imgur.com/L7N0RcW.png", // chibi love
-    "https://i.imgur.com/3vF9Z1a.png", // bunga sakura
-    "https://i.imgur.com/fT4pMkL.png", // stiker "kawaii"
+    "https://i.imgur.com/6Q2J7jP.png",
+    "https://i.imgur.com/RzV6f4k.png",
+    "https://i.imgur.com/YqF7wZN.png",
+    "https://i.imgur.com/L7N0RcW.png",
+    "https://i.imgur.com/3vF9Z1a.png",
+    "https://i.imgur.com/fT4pMkL.png"
   ];
 
   let conversationHistory = [SYSTEM_PROMPT];
@@ -350,7 +346,6 @@ Jawabanmu harus menyenangkan dan menghangatkan hati.`
     }
   }
 
-  // ========== FUNGSI UI ==========
   function addMessage(sender, text, isHTML = false, extraClass = '') {
     const msgDiv = document.createElement('div');
     msgDiv.className = `message ${sender}`;
@@ -384,19 +379,15 @@ Jawabanmu harus menyenangkan dan menghangatkan hati.`
     if (el) el.remove();
   }
 
-  // ========== KIRIM STIKER ==========
   function kirimStiker() {
     const randomUrl = stikerURLs[Math.floor(Math.random() * stikerURLs.length)];
-    // Tampilkan stiker sebagai pesan user
     const stikerHTML = `<img src="${randomUrl}" class="stiker-img" alt="stiker anime">`;
     addMessage('user', stikerHTML, true);
-    // Kirim pesan khusus ke AI agar membalas stiker
     const promptStiker = "(mengirim stiker lucu)";
     conversationHistory.push({ role: 'user', content: promptStiker });
     prosesAI(promptStiker);
   }
 
-  // ========== KIRIM PESAN TEKS ==========
   async function sendMessage() {
     const text = userInput.value.trim();
     if (!text) return;
@@ -415,7 +406,7 @@ Jawabanmu harus menyenangkan dan menghangatkan hati.`
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${API_KEY}`,
           'HTTP-Referer': window.location.href,
-          'X-Title': 'Watashi Stiker Chat'
+          'X-Title': 'Watashi Chat'
         },
         body: JSON.stringify({
           model: MODEL,
@@ -444,7 +435,6 @@ Jawabanmu harus menyenangkan dan menghangatkan hati.`
     }
   }
 
-  // ========== SAKURA PETALS ==========
   function createPetal() {
     const petal = document.createElement('div');
     petal.classList.add('petal');
